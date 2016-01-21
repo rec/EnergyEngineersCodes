@@ -5,19 +5,21 @@
 
 # In[1]:
 
+from subprocess import call
+call(["sudo", "chmod", "a+rw", "/dev/spidev0.0"])
+
 from bibliopixel import *
 from bibliopixel.drivers.LPD8806 import *
 from bibliopixel import LEDStrip
 
 import time
-from subprocess import call
 
 
 # ### Shell commands to reset spidev
 
 # In[ ]:
 
-call(["sudo", "chmod", "a+rw", "/dev/spidev0.0"])
+
 
 
 # ### Initial setup
@@ -53,14 +55,4 @@ while (TRUE):
     led.fillRGB(b)
     led.update()
     time.sleep(4)
-
-
-# In[ ]:
-
-
-
-
-# In[ ]:
-
-
 
