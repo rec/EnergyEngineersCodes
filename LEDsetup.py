@@ -3,6 +3,9 @@
 
 # In[1]:
 
+from subprocess import call
+call(["sudo", "chmod", "a+rw", "/dev/spidev0.0"])
+
 from bibliopixel import *
 from bibliopixel.drivers.LPD8806 import *
 from bibliopixel import LEDStrip
