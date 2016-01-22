@@ -54,13 +54,13 @@ api = tweepy.API(auth)
 class MyListener(StreamListener):
 
     def flash(self, delay, color):
-        #led.fill(color)
-        print color
-        #led.update()
+        led.fill(color)
+        #print color
+        led.update()
         time.sleep(delay)
         
-        #led.all_off()
-        #led.update()
+        led.all_off()
+        led.update()
         print delay
         return True
 
