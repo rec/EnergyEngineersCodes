@@ -61,7 +61,7 @@ class MyListener(StreamListener):
         
         led.all_off()
         led.update()
-        print delay
+        #print delay
         return True
 
  
