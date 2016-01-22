@@ -8,6 +8,7 @@
 from bibliopixel import *
 from bibliopixel.drivers.LPD8806 import *
 from bibliopixel import LEDStrip
+import numpy as np
 
 import time
 import json
@@ -68,7 +69,8 @@ class MyListener(StreamListener):
         try:
             
             print ('New Tweet!!')
-            self.flash(0.5, (0,0,128))
+            
+            self.flash(0.5, (np.random.randint(1,255),np.random.randint(1,255),np.random.randint(1,255)))
             with open('twitter_out.json', 'a') as f:  #set output filename here
                 f.write(data)
                 return True
@@ -84,6 +86,18 @@ class MyListener(StreamListener):
 twitter_stream = Stream(auth, MyListener())
 twitter_stream.filter(track=['#trump']) #set hashtag here; 
 
+
+# In[3]:
+
+np.random.randint(1,255)
+
+
+# In[ ]:
+
+
+
+
+# In[ ]:
 
 
 
