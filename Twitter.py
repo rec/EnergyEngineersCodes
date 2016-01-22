@@ -48,27 +48,27 @@ api = tweepy.API(auth)
 
 # ### Define flashmode
 
-# In[4]:
+# In[5]:
 
 #Streaming API Listner
 class MyListener(StreamListener):
 
     def flash(self, delay, color):
-        led.fill(color)
-        #print color
-        led.update()
+        #led.fill(color)
+        print color
+        #led.update()
         time.sleep(delay)
         
-        led.all_off()
-        led.update()
-        #print delay
+        #led.all_off()
+        #led.update()
+        print delay
         return True
 
  
     def on_data(self, data):
         try:
             
-            print ('New Tweet!!')
+            print ('Some tweeted #' + hashtag +'!')
             
             self.flash(0.5, (np.random.randint(1,255),np.random.randint(1,255),np.random.randint(1,255)))
             with open('twitter_out.json', 'a') as f:  #set output filename here
@@ -83,6 +83,9 @@ class MyListener(StreamListener):
         return True
 
 
+print 'What hashtag would you like to track?'
+hashtag = raw_input('Enter here: #')
+
 twitter_stream = Stream(auth, MyListener())
 twitter_stream.filter(track=['#trump']) #set hashtag here; 
 
@@ -92,9 +95,21 @@ twitter_stream.filter(track=['#trump']) #set hashtag here;
 np.random.randint(1,255)
 
 
-# In[ ]:
+# In[2]:
+
+print 'What hashtag would you like to track?'
+hashtag = raw_input('Enter here: #')
 
 
+# In[3]:
+
+hashtag
+
+
+# In[6]:
+
+twitter_stream = Stream(auth, MyListener())
+twitter_stream.filter(track=['#'+hashtag]) #set hashtag here; 
 
 
 # In[ ]:
