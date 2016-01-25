@@ -26,8 +26,8 @@ import time
 
 # In[ ]:
 
-numLeds=26
-driver=DriverLPD8806(numLeds)
+numLeds=64
+driver=DriverLPD8806(numLeds, ChannelOrder.BRG)
 led=LEDStrip(driver)
 
 r = (0, 180, 0) # LEDs are GRB; 255 is too bright
@@ -47,7 +47,7 @@ for i in range (numLeds):
     print ('LED '+str(i+1))
     led.set(i, b)
     led.update()
-    time.sleep(4)
+    time.sleep(0.5)
 
 print ('All LEDs!')
 print ('Press \'Ctrl + C\' to stop')
