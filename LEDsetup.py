@@ -33,7 +33,7 @@ import time
 
 
 numLeds=8*8
-driver=DriverLPD8806(numLeds, ChannelOrder.BRG, gamma = 2)
+driver=DriverLPD8806(numLeds, ChannelOrder.BRG)
 
 # We name our LEDstrips 'led'. 
 # We tell the driver that it is a long string of LEDs, not a rectangle or any other shape
@@ -41,14 +41,13 @@ driver=DriverLPD8806(numLeds, ChannelOrder.BRG, gamma = 2)
 led=LEDStrip(driver)
 
 
-# In[2]:
+# In[1]:
 
 # Pre-defining colors in Red Green Blue order
 
 Off = (0, 0, 0)
 Blue = (0, 0, 255)
-Pink = (255, 100, 203)
-Honeydew = (1, 255, 130)
+Pink = (255, 20, 147)
 Purple = (128, 0, 128)
 Fuchsia = (255, 0, 255)
 LawnGreen = (124, 252, 0)
@@ -189,4 +188,9 @@ MediumAquamarine = (102, 205, 170)
 Gold = (255, 215, 0)
 Orchid = (218, 112, 214)
 OldLace = (253, 245, 230)
+
+
+# In[ ]:
+
+
 
