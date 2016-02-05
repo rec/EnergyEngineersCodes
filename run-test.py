@@ -25,7 +25,7 @@ call(["sudo", "chmod", "a+rw", "/dev/spidev0.0"])
 # In[ ]:
 
 numLeds=64
-driver=DriverLPD8806(numLeds)
+driver=DriverLPD8806(numLeds, ChannelOrder.BRG)
 led=LEDStrip(driver)
 
 r = (0, 180, 0) # LEDs are GRB; 255 is too bright
