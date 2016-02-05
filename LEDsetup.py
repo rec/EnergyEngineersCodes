@@ -1,6 +1,9 @@
 
+# coding: utf-8
 
-# These lines reset a driver called spidev, 
+# In[1]:
+
+# The lines reset a driver called spidev, 
 # that is used to drive the signal sent to the lights from the raspberry pi
 from subprocess import call
 call(["sudo", "chmod", "a+rw", "/dev/spidev0.0"])
@@ -18,6 +21,9 @@ from bibliopixel import LEDStrip
 
 import time
 
+
+# In[2]:
+
 # numLeds is the number of LEDs in our lamp
 # we set the driver to the specific one that drives our LED lights 
 # along with the information about how many lights there are
@@ -25,20 +31,24 @@ import time
 # ChannelOrder says in what order the 3 colors Red, Green, Blue are organized
 # in our case it is Blue Red Green (BRG)
 
+
 numLeds=8*8
-driver=DriverLPD8806(numLeds, ChannelOrder.BRG)
+driver=DriverLPD8806(numLeds, ChannelOrder.BRG, gamma = 2)
 
 # We name our LEDstrips 'led'. 
 # We tell the driver that it is a long string of LEDs, not a rectangle or any other shape
 
 led=LEDStrip(driver)
 
+
+# In[2]:
+
 # Pre-defining colors in Red Green Blue order
 
 Off = (0, 0, 0)
 Blue = (0, 0, 255)
-Pink = (255, 192, 203)
-Honeydew = (240, 255, 240)
+Pink = (255, 100, 203)
+Honeydew = (1, 255, 130)
 Purple = (128, 0, 128)
 Fuchsia = (255, 0, 255)
 LawnGreen = (124, 252, 0)
@@ -179,9 +189,4 @@ MediumAquamarine = (102, 205, 170)
 Gold = (255, 215, 0)
 Orchid = (218, 112, 214)
 OldLace = (253, 245, 230)
-
-
-# In[ ]:
-
-
 
