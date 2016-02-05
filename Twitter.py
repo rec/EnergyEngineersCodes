@@ -3,7 +3,7 @@
 
 # ### Import libraries
 
-# In[10]:
+# In[1]:
 
 from bibliopixel import *
 from bibliopixel.drivers.LPD8806 import *
@@ -24,16 +24,16 @@ from tweepy import OAuthHandler
 
 # In[2]:
 
-LedsPerSide = 8
+LedsPerSide = 10
 NumLeds= LedsPerSide*4*2 ##* 4 sides * 2 levels
-driver=DriverLPD8806(NumLeds)
+driver=DriverLPD8806(NumLeds, ChannelOrder.BRG)
 led=LEDStrip(driver)
 
 
 # ### Authentication
 # #### (From BrannonDorsey LoopLamp Project)
 
-# In[2]:
+# In[3]:
 
 
 consumer_key = "TroyIuC1l3i3laNlwl5mg"
@@ -49,7 +49,7 @@ api = tweepy.API(auth)
 
 # ### Define flashmode
 
-# In[17]:
+# In[4]:
 
 #Streaming API Listner
 class MyListener(StreamListener):
@@ -91,7 +91,7 @@ hashtag = raw_input('Enter here: #')
 #twitter_stream.filter(track=['#trump']) #set hashtag here; 
 
 
-# In[18]:
+# In[6]:
 
 twitter_stream = Stream(auth, MyListener())
 twitter_stream.filter(track=['#'+hashtag]) #set hashtag here; 
