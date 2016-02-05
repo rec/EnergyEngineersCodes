@@ -3,7 +3,7 @@
 
 # ### Import libraries
 
-# In[1]:
+# In[10]:
 
 from bibliopixel import *
 from bibliopixel.drivers.LPD8806 import *
@@ -12,6 +12,7 @@ import numpy as np
 
 import time
 import json
+from datetime import datetime
 
 import tweepy
 from tweepy import Stream
@@ -32,7 +33,7 @@ led=LEDStrip(driver)
 # ### Authentication
 # #### (From BrannonDorsey LoopLamp Project)
 
-# In[3]:
+# In[2]:
 
 
 consumer_key = "TroyIuC1l3i3laNlwl5mg"
@@ -48,19 +49,19 @@ api = tweepy.API(auth)
 
 # ### Define flashmode
 
-# In[5]:
+# In[17]:
 
 #Streaming API Listner
 class MyListener(StreamListener):
 
     def flash(self, delay, color):
-        led.fill(color)
-        #print color
-        led.update()
+        #led.fill(color)
+        print color
+        #led.update()
         time.sleep(delay)
         
-        led.all_off()
-        led.update()
+        #led.all_off()
+        #led.update()
         #print delay
         return True
 
@@ -68,12 +69,12 @@ class MyListener(StreamListener):
     def on_data(self, data):
         try:
             
-            print ('Someone tweeted #' + hashtag +'!')
-            
             self.flash(0.5, (np.random.randint(1,255),np.random.randint(1,255),np.random.randint(1,255)))
-            with open('twitter_out.json', 'a') as f:  #set output filename here
-                f.write(data)
-                return True
+            #with open('twitter_out.json', 'a') as f:  #set output filename here
+               # f.write(data) return True
+            print datetime.now().strftime('%Y-%m-%d %H:%M:%S'), ': someone tweeted #' + hashtag +'!'
+            
+
         except BaseException as e:
             print("Error on_data: %s" % str(e))
         return True
@@ -86,27 +87,11 @@ class MyListener(StreamListener):
 print 'What hashtag would you like to track?'
 hashtag = raw_input('Enter here: #')
 
-twitter_stream = Stream(auth, MyListener())
-twitter_stream.filter(track=['#trump']) #set hashtag here; 
+#twitter_stream = Stream(auth, MyListener())
+#twitter_stream.filter(track=['#trump']) #set hashtag here; 
 
 
-# In[3]:
-
-np.random.randint(1,255)
-
-
-# In[2]:
-
-print 'What hashtag would you like to track?'
-hashtag = raw_input('Enter here: #')
-
-
-# In[3]:
-
-hashtag
-
-
-# In[6]:
+# In[18]:
 
 twitter_stream = Stream(auth, MyListener())
 twitter_stream.filter(track=['#'+hashtag]) #set hashtag here; 
