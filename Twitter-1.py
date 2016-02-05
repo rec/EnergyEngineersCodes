@@ -3,7 +3,7 @@
 
 # ### Import libraries
 
-# In[1]:
+# In[12]:
 
 from bibliopixel import *
 from bibliopixel.drivers.LPD8806 import *
@@ -22,7 +22,7 @@ from tweepy import OAuthHandler
 
 # ### Define LED parameters
 
-# In[2]:
+# In[13]:
 
 LedsPerSide = 10
 NumLeds= LedsPerSide*4*2 ##* 4 sides * 2 levels
@@ -33,7 +33,7 @@ led=LEDStrip(driver)
 # ### Authentication 1
 # #### (From BrannonDorsey LoopLamp Project)
 
-# In[7]:
+# In[14]:
 
 consumer_key = "TroyIuC1l3i3laNlwl5mg"
 consumer_secret = "qYRSTEHzHhTsL0CBcMnXxjqeY5UQ6U4C0kNvmPSG4K4"
@@ -44,7 +44,7 @@ access_secret = "wscl1nV8gFO4kMhtJy7DjhQKkpJHB1fW5Jzb4RXZq8"
 # ### Authentication 2
 # #### (SmartLamp App)
 
-# In[8]:
+# In[15]:
 
 #consumer_key = "4KxmuenXbg3BEQkw8dr0OQukG"
 #consumer_secret = "6oKhNjtiadaCrPEdC6iyo4o8WoWNxghn7mI3VHNDqaSWNdnpPy"
@@ -55,7 +55,7 @@ access_secret = "wscl1nV8gFO4kMhtJy7DjhQKkpJHB1fW5Jzb4RXZq8"
 # ### Authentication 3
 # #### (SmartLamp2 App)
 
-# In[9]:
+# In[16]:
 
 #consumer_key = "dMKVYd1EVI5ac5WcpMwemYcFM"
 #consumer_secret = "TY1cahDWwBPN2fg4GeLZ5wvnfBlTLTDPFiWPH9YUxlWeYMEtsZ"
@@ -66,7 +66,7 @@ access_secret = "wscl1nV8gFO4kMhtJy7DjhQKkpJHB1fW5Jzb4RXZq8"
 # ### Authentication 4
 # #### (SmartLamp3 App)
 
-# In[10]:
+# In[17]:
 
 #consumer_key = "RUmOeWto992y4HqJWKP5XEUlx"
 #consumer_secret = "i3t2oaaZcatTlMlRlsqaC5dUVNTdFOdnkelJJ2FA71PSAOvUfl"
@@ -77,7 +77,7 @@ access_secret = "wscl1nV8gFO4kMhtJy7DjhQKkpJHB1fW5Jzb4RXZq8"
 # ### Authentication 5
 # #### (SmartLamp4 App)
 
-# In[11]:
+# In[18]:
 
 #consumer_key = "TXYjr7ogYQKAR23qFoT7jyiQI"
 #consumer_secret = "H3MypqdYnu7A3wIjDiRaxKJXuQj4xuEJtqZtXQEF0ULPKYMDDA"
@@ -85,9 +85,9 @@ access_secret = "wscl1nV8gFO4kMhtJy7DjhQKkpJHB1fW5Jzb4RXZq8"
 #access_secret = "AP6vzdlBAa5F8mSqa0C6bYkO2qNtqNYwhKXdrQyZjkRkN"
 
 
-# In[ ]:
+# In[25]:
 
-auth = OAuthHandler(consumer_key, consumer_secret)
+auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_secret)
  
 api = tweepy.API(auth)
@@ -95,7 +95,7 @@ api = tweepy.API(auth)
 
 # ### Define flashmode
 
-# In[4]:
+# In[26]:
 
 #Streaming API Listner
 class MyListener(StreamListener):
@@ -137,7 +137,7 @@ hashtag = raw_input('Enter here: #')
 #twitter_stream.filter(track=['#trump']) #set hashtag here; 
 
 
-# In[6]:
+# In[ ]:
 
 twitter_stream = Stream(auth, MyListener())
 twitter_stream.filter(track=['#'+hashtag]) #set hashtag here; 

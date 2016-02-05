@@ -57,21 +57,21 @@ led=LEDStrip(driver)
 
 # In[3]:
 
-consumer_key = "dMKVYd1EVI5ac5WcpMwemYcFM"
-consumer_secret = "TY1cahDWwBPN2fg4GeLZ5wvnfBlTLTDPFiWPH9YUxlWeYMEtsZ"
-access_token = "28338904-u7aHX0RrCR8VoM6ONYhjUToCsGJTmtgGq6hKthiVP"
-access_secret = "OOA8YkFnkKCY9xGK0P0gFMimRtzEhKG6sW0ZBBWnnlUYC"
+#consumer_key = "dMKVYd1EVI5ac5WcpMwemYcFM"
+#consumer_secret = "TY1cahDWwBPN2fg4GeLZ5wvnfBlTLTDPFiWPH9YUxlWeYMEtsZ"
+#access_token = "28338904-u7aHX0RrCR8VoM6ONYhjUToCsGJTmtgGq6hKthiVP"
+#access_secret = "OOA8YkFnkKCY9xGK0P0gFMimRtzEhKG6sW0ZBBWnnlUYC"
 
 
 # ### Authentication 4
 # #### (SmartLamp3 App)
 
-# In[ ]:
+# In[3]:
 
-#consumer_key = "RUmOeWto992y4HqJWKP5XEUlx"
-#consumer_secret = "i3t2oaaZcatTlMlRlsqaC5dUVNTdFOdnkelJJ2FA71PSAOvUfl"
-#access_token = "28338904-BCDVUBUIRZCSHJG88phypCMkVPwfnqGV0kHmgpCXH"
-#access_secret = "Ca9TzkD7jbpleEqcYMFMWXMLXJH7XD9H8QVq3joD7hvQe"
+consumer_key = "RUmOeWto992y4HqJWKP5XEUlx"
+consumer_secret = "i3t2oaaZcatTlMlRlsqaC5dUVNTdFOdnkelJJ2FA71PSAOvUfl"
+access_token = "28338904-BCDVUBUIRZCSHJG88phypCMkVPwfnqGV0kHmgpCXH"
+access_secret = "Ca9TzkD7jbpleEqcYMFMWXMLXJH7XD9H8QVq3joD7hvQe"
 
 
 # ### Authentication 5
@@ -85,9 +85,9 @@ access_secret = "OOA8YkFnkKCY9xGK0P0gFMimRtzEhKG6sW0ZBBWnnlUYC"
 #access_secret = "AP6vzdlBAa5F8mSqa0C6bYkO2qNtqNYwhKXdrQyZjkRkN"
 
 
-# In[4]:
+# In[5]:
 
-auth = OAuthHandler(consumer_key, consumer_secret)
+auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_secret)
  
 api = tweepy.API(auth)
@@ -95,7 +95,7 @@ api = tweepy.API(auth)
 
 # ### Define flashmode
 
-# In[5]:
+# In[6]:
 
 #Streaming API Listner
 class MyListener(StreamListener):
