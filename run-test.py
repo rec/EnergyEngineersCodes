@@ -5,9 +5,6 @@
 
 # In[1]:
 
-from subprocess import call
-call(["sudo", "chmod", "a+rw", "/dev/spidev0.0"])
-
 from bibliopixel import *
 from bibliopixel.drivers.LPD8806 import *
 from bibliopixel import LEDStrip
@@ -19,7 +16,8 @@ import time
 
 # In[ ]:
 
-
+from subprocess import call
+call(["sudo", "chmod", "a+rw", "/dev/spidev0.0"])
 
 
 # ### Initial setup
@@ -27,7 +25,7 @@ import time
 # In[ ]:
 
 numLeds=64
-driver=DriverLPD8806(numLeds, ChannelOrder.BRG)
+driver=DriverLPD8806(numLeds)
 led=LEDStrip(driver)
 
 r = (0, 180, 0) # LEDs are GRB; 255 is too bright
@@ -47,12 +45,7 @@ for i in range (numLeds):
     print ('LED '+str(i+1))
     led.set(i, b)
     led.update()
-    time.sleep(0.5)
+    time.sleep(4)
 
 print ('All LEDs!')
-print ('Press \'Ctrl + C\' to stop')
-while (TRUE):
-    led.fillRGB(b)
-    led.update()
-    time.sleep(4)
 
