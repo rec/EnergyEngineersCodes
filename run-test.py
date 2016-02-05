@@ -45,7 +45,7 @@ for i in range (numLeds):
     print ('LED '+str(i+1))
     led.set(i, b)
     led.update()
-    time.sleep(4)
+    time.sleep(0.25)
 
 print ('All LEDs!')
 
