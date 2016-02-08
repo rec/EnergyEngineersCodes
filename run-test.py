@@ -24,7 +24,7 @@ call(["sudo", "chmod", "a+rw", "/dev/spidev0.0"])
 
 # In[ ]:
 
-numLeds=64
+numLeds= 10 * 8
 driver=DriverLPD8806(numLeds, ChannelOrder.BRG)
 led=LEDStrip(driver)
 
