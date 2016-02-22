@@ -200,7 +200,7 @@ def OneWeek_data():
             print 'Electricity Usage: ', val
             color_index = int((val)/ScalingSteps)
 
-            print color_index
+            #print color_index
             color = color_gn_rd[color_index]
             led_set(0, 80, color)
             time.sleep(0.2)
