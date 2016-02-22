@@ -5,11 +5,8 @@
 
 # In[1]:
 
-import csv
-import numpy as np
-import matplotlib.pyplot as plt
 import pandas as pd
-from pandas.io.json import json_normalize
+import numpy as np
 
 import time
 
@@ -61,10 +58,10 @@ total_colors = len(color_gn_rd)
 
 # In[5]:
 
-LedsPerSide = 10
-numLeds= LedsPerSide*4*2 ##x/side * 4 sides * 2 levels
-driver=DriverLPD8806(numLeds, ChannelOrder.BRG)
-led=LEDStrip(driver)
+#LedsPerSide = 10
+#numLeds= LedsPerSide*4*2 ##x/side * 4 sides * 2 levels
+#driver=DriverLPD8806(numLeds, ChannelOrder.BRG)
+#led=LEDStrip(driver)
 
 
 # ### Defining Flashing modes
@@ -78,7 +75,7 @@ def led_set(start_position, numLEDs, color): ## Fills the colors
     return
 
 def led_pulse(start_position, numLEDs, color):
-    ## Step-up intensity by 10% increments, then step down by the same every 0.1 seconds. total time = 4 sec
+    ## Step-up intensity by 10% increments, then step down by the same every 0.1 seconds. total time = 2 sec
     
     intensity = np.arange(0,1.1,0.1) 
 
@@ -115,6 +112,12 @@ df_Dailygroup = df_total.groupby('Date')
 df_DailyAverage = df_Dailygroup['value'].sum()
 df_RollingMean = pd.rolling_mean(df_DailyAverage, 30)
 
+#Added by time stamp
+
+df_group = df_total.groupby('time_stamp')
+df_new = df_group['value'].sum()
+
+df_1Week = df_new[(df_new.index > '2015-9-19 00:00:00') & (df_new.index < '2015-9-26 00:00:00')]
 
 # ### Displaying Daily Total Values for the entire year of data
 
@@ -133,6 +136,7 @@ def yearly_data():
             # print color_index
             color = color_gn_rd[color_index]
             led_set(0, 80, color)
+	    time.sleep(0.2)
 
 
 # ### Displaying Daily Energy Usage on Bottom with last 30 days' average on Top
@@ -164,6 +168,7 @@ def daily_vs_past30days():
             except:
                 color = (0,0,0)
                 led_set(40, 80, color)
+	    time.sleep(0.2)
 
             count = count + 1
 
@@ -173,19 +178,24 @@ def daily_vs_past30days():
 # ### Displaying 1 Week's Energy Use (res: every half-hour )
 
 # In[10]:
+days = ['Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
 
 def OneWeek_data():
     date = pd.DatetimeIndex(df_1Week.index).date[1]
     while (True):
         print 'Starting Display'
         print 'Press \'Control + C\' to stop'
-
+	max_value = df_1Week.max()
+        ScalingSteps = (max_value + 0.1)/total_colors
+	count = 0
         for item in df_1Week.iteritems():
             ts = item[0]
 
             type(ts.date)
             if(date != time.strftime("%Y-%m-%d",  time.strptime(str(ts), "%Y-%m-%d %H:%M:%S"))):
+		print days[count]
                 led_pulse(0, 80, (0,0,255))
+		count = count + 1
 
             print 'Time: ', item[0]
             print 'Electricity Usage: ', item [1]
@@ -194,6 +204,7 @@ def OneWeek_data():
             print color_index
             color = color_gn_rd[color_index]
             led_set(0, 80, color)
+	    time.sleep(0.2)
 
             date = time.strftime("%Y-%m-%d",  time.strptime(str(ts), "%Y-%m-%d %H:%M:%S"))
 
@@ -201,9 +212,9 @@ def OneWeek_data():
 # In[11]:
 
 print 'Functions Available:'
-print 'yearly_data()'
-print 'daily_vs_past30days()'
-print 'OneWeek_data()'
+print 'yearly_data(): displays average daily use for a whole year'
+print 'daily_vs_past30days(): displays average daily use in the bottom panels and past 30 day average in the top panel'
+print 'OneWeek_data(): displays past weeks data in 30 minute intervals'
 
 
 # In[ ]:
