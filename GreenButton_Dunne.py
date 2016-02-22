@@ -11,7 +11,6 @@ import numpy as np
 import time
 
 from datetime import datetime
-from dateutil import tz
 
 from bibliopixel import *
 from bibliopixel.drivers.LPD8806 import *
