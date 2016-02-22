@@ -5,9 +5,9 @@
 
 # In[1]:
 
-import pandas as pd
-import numpy as np
 
+import csv
+import numpy as np
 import time
 
 from datetime import datetime
@@ -19,25 +19,18 @@ from bibliopixel import LEDStrip
 import bibliopixel.colors as colors
 
 
-# In[2]:
-
-## read data
-df_total = pd.read_pickle('All_meters_concat')
-df_new = pd.read_pickle('Dunne_Daily_Average')
-
-
 # ### Generating color scale
 
-# In[3]:
+# In[2]:
 
 red = 0
 green = 255
 stepSize = 50
 color_gn_rd = []
-color_gn_rd.append((red, green, 0)) 
+color_gn_rd.append((red, green, 0)) ## the lights are GRB format
 
 
-# In[4]:
+# In[3]:
 
 while(red < 255): ## start with green and increase red
     red += stepSize;
@@ -56,17 +49,17 @@ total_colors = len(color_gn_rd)
 
 # ### Setting up LEDs
 
-# In[5]:
+# In[4]:
 
-#LedsPerSide = 10
-#numLeds= LedsPerSide*4*2 ##x/side * 4 sides * 2 levels
-#driver=DriverLPD8806(numLeds, ChannelOrder.BRG)
-#led=LEDStrip(driver)
+LedsPerSide = 10
+numLeds= LedsPerSide*4*2 ##x/side * 4 sides * 2 levels
+driver=DriverLPD8806(numLeds, ChannelOrder.BRG)
+led=LEDStrip(driver)
 
 
 # ### Defining Flashing modes
 
-# In[6]:
+# In[5]:
 
 def led_set(start_position, numLEDs, color): ## Fills the colors
     led.fill(color, start=start_position,end=start_position+numLEDs)
@@ -95,45 +88,29 @@ def led_pulse(start_position, numLEDs, color):
         time.sleep(0.1)        
 
 
-# ### Calculate Average Data
-
-# In[7]:
-
-#Added by Month
-
-df_total['Month'] = pd.DatetimeIndex(df_total['time_stamp']).month
-df_Monthlygroup = df_total.groupby('Month')
-df_MonthlyAverage = df_Monthlygroup['value'].sum()
-
-#Added by Day
-
-df_total['Date'] = pd.DatetimeIndex(df_total['time_stamp']).date
-df_Dailygroup = df_total.groupby('Date')
-df_DailyAverage = df_Dailygroup['value'].sum()
-df_RollingMean = pd.rolling_mean(df_DailyAverage, 30)
-
-#Added by time stamp
-
-df_group = df_total.groupby('time_stamp')
-df_new = df_group['value'].sum()
-
-df_1Week = df_new[(df_new.index > '2015-9-19 00:00:00') & (df_new.index < '2015-9-26 00:00:00')]
-
 # ### Displaying Daily Total Values for the entire year of data
 
-# In[8]:
+# In[11]:
 
 def yearly_data():
+    time_stamp = []
+    value = []
+    with open('df_DailyAverage_Dunne.csv') as f:
+        cf = csv.DictReader(f, fieldnames=['time_stamp', 'value'])
+        for row in cf:
+            time_stamp.append(row['time_stamp'])
+            value.append(float(row['value']))
     while (True):
         print 'Starting Display'
         print 'Press \'Control + C\' to stop'
-        max_value = df_DailyAverage.max()
+        max_value = max(value)
         ScalingSteps = (max_value + 0.1)/(total_colors)
-        for item in df_DailyAverage.iteritems():
-            print 'Date: ', item[0]
-            print 'Average use: ', item [1]
-            color_index = int(item[1]/ScalingSteps)
-            # print color_index
+        for ts, val in zip(time_stamp,value):
+            print 'Date: ', ts
+            print 'Average use: ', val
+            color_index = int(val/ScalingSteps)
+            #print color_index
+            #print color_index
             color = color_gn_rd[color_index]
             led_set(0, 80, color)
 	    time.sleep(0.2)
@@ -141,25 +118,42 @@ def yearly_data():
 
 # ### Displaying Daily Energy Usage on Bottom with last 30 days' average on Top
 
-# In[9]:
+# In[23]:
 
 def daily_vs_past30days():
+    time_stamp = []
+    value = []
+    with open('df_DailyAverage_Dunne.csv') as f:
+        cf = csv.DictReader(f, fieldnames=['time_stamp', 'value'])
+        for row in cf:
+            time_stamp.append(row['time_stamp'])
+            value.append(float(row['value']))
+            
+    average = []
+    with open('df_RollingMean.csv') as f:
+        cf = csv.DictReader(f, fieldnames=['time_stamp', 'value'])
+        for row in cf:
+            try:
+                average.append(float(row['value']))
+            except:
+                average.append(float('nan'))
+    max_value = max(value)
+    ScalingSteps = (max_value + 0.1)/total_colors
+            
     while (True):
         print 'Starting Display'
         print 'Press \'Control + C\' to stop'
-        max_value = df_DailyAverage.max()
-        ScalingSteps = (max_value + 0.1)/total_colors
-        count = 0
-        for item in df_DailyAverage.iteritems():
-            print 'Date: ', item[0]
-            print 'Total use: ', item [1]
-            color_index = int(item[1]/ScalingSteps)
+
+        for ts, val, av in zip(time_stamp, value, average):
+            print 'Date: ', ts
+            print 'Total use: ', val
+            color_index = int(val/ScalingSteps)
 
             # print color_index
             color = color_gn_rd[color_index]
             led_set(0, 40, color)
 
-            print 'Last 30 days average: ', df_RollingMean[count]
+            print 'Last 30 days average: ', av
             try:
                 color_index = int(df_RollingMean[count]/ScalingSteps)
                 color = color_gn_rd[color_index]
@@ -168,56 +162,59 @@ def daily_vs_past30days():
             except:
                 color = (0,0,0)
                 led_set(40, 80, color)
-	    time.sleep(0.2)
 
-            count = count + 1
-
+            time.sleep(0.2)
     
 
 
 # ### Displaying 1 Week's Energy Use (res: every half-hour )
 
-# In[10]:
-days = ['Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
+# In[8]:
 
 def OneWeek_data():
-    date = pd.DatetimeIndex(df_1Week.index).date[1]
+    time_stamp = []
+    value = []
+    with open('df_1Week_Dunne.csv') as f:
+        cf = csv.DictReader(f, fieldnames=['time_stamp', 'value'])
+        for row in cf:
+            time_stamp.append(row['time_stamp'])
+            value.append(float(row['value']))
+
+    days = ['Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
+    max_value = max(value)
+    ScalingSteps = (max_value + 0.1)/total_colors
+    date = []
     while (True):
         print 'Starting Display'
         print 'Press \'Control + C\' to stop'
-	max_value = df_1Week.max()
-        ScalingSteps = (max_value + 0.1)/total_colors
-	count = 0
-        for item in df_1Week.iteritems():
-            ts = item[0]
-
-            type(ts.date)
-            if(date != time.strftime("%Y-%m-%d",  time.strptime(str(ts), "%Y-%m-%d %H:%M:%S"))):
-		print days[count]
+        
+        count = 0
+        for ts, val in zip(time_stamp, value):
+            
+            
+            if(date != time.strftime("%Y-%m-%d",  time.strptime(ts, "%Y-%m-%d %H:%M:%S"))):
+                print days[count]
                 led_pulse(0, 80, (0,0,255))
-		count = count + 1
+                count = count + 1
 
-            print 'Time: ', item[0]
-            print 'Electricity Usage: ', item [1]
-            color_index = int((item[1])/ScalingSteps)
+            print 'Time: ', ts
+            print 'Electricity Usage: ', val
+            color_index = int((val)/ScalingSteps)
 
             print color_index
             color = color_gn_rd[color_index]
             led_set(0, 80, color)
-	    time.sleep(0.2)
+            time.sleep(0.2)
 
-            date = time.strftime("%Y-%m-%d",  time.strptime(str(ts), "%Y-%m-%d %H:%M:%S"))
+            date = time.strftime("%Y-%m-%d",  time.strptime(ts, "%Y-%m-%d %H:%M:%S"))
 
 
 # In[11]:
 
 print 'Functions Available:'
-print 'yearly_data(): displays average daily use for a whole year'
-print 'daily_vs_past30days(): displays average daily use in the bottom panels and past 30 day average in the top panel'
-print 'OneWeek_data(): displays past weeks data in 30 minute intervals'
-
-
-# In[ ]:
+print 'yearly_data(): Displays daily average for a year '
+print 'daily_vs_past30days(): Displays daily average + past 30 day avg.'
+print 'OneWeek_data(): Displays past 1 week’s data, 30 min interval '
 
 
 
