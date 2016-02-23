@@ -208,11 +208,11 @@ def OneWeek_data():
             try:
                 color = color_gn_rd[color_index]
                 led_set(0, 80, color)
-                time.sleep(0.2)
+                time.sleep(0.4)
             except: 
                 color = color_gn_rd[0]
                 led_set(0, 80, color)
-                time.sleep(0.2)
+                time.sleep(0.4)
                 
 
             date = time.strftime("%Y-%m-%d",  time.strptime(ts, "%Y-%m-%d %H:%M:%S"))
