@@ -11,6 +11,7 @@ import numpy as np
 import time
 
 from datetime import datetime
+from dateutil import tz
 
 from bibliopixel import *
 from bibliopixel.drivers.LPD8806 import *
@@ -48,7 +49,7 @@ total_colors = len(color_gn_rd)
 
 # ### Setting up LEDs
 
-# In[4]:
+# In[ ]:
 
 LedsPerSide = 10
 numLeds= LedsPerSide*4*2 ##x/side * 4 sides * 2 levels
@@ -58,7 +59,7 @@ led=LEDStrip(driver)
 
 # ### Defining Flashing modes
 
-# In[5]:
+# In[4]:
 
 def led_set(start_position, numLEDs, color): ## Fills the colors
     led.fill(color, start=start_position,end=start_position+numLEDs)
@@ -67,7 +68,7 @@ def led_set(start_position, numLEDs, color): ## Fills the colors
     return
 
 def led_pulse(start_position, numLEDs, color):
-    ## Step-up intensity by 10% increments, then step down by the same every 0.1 seconds. total time = 2 sec
+    ## Step-up intensity by 10% increments, then step down by the same every 0.1 seconds. total time = 4 sec
     
     intensity = np.arange(0,1.1,0.1) 
 
@@ -89,7 +90,7 @@ def led_pulse(start_position, numLEDs, color):
 
 # ### Displaying Daily Total Values for the entire year of data
 
-# In[11]:
+# In[9]:
 
 def yearly_data():
     time_stamp = []
@@ -99,25 +100,26 @@ def yearly_data():
         for row in cf:
             time_stamp.append(row['time_stamp'])
             value.append(float(row['value']))
+            max_value = max(value)
+            min_value = min(value)
+            ScalingSteps = (max_value + 0.1 - min_value)/(total_colors)
     while (True):
         print 'Starting Display'
         print 'Press \'Control + C\' to stop'
-        max_value = max(value)
-        ScalingSteps = (max_value + 0.1)/(total_colors)
+        
         for ts, val in zip(time_stamp,value):
             print 'Date: ', ts
             print 'Average use: ', val
-            color_index = int(val/ScalingSteps)
+            color_index = int((val - min_value)/ScalingSteps)
             #print color_index
             #print color_index
             color = color_gn_rd[color_index]
             led_set(0, 80, color)
-	    time.sleep(0.2)
 
 
 # ### Displaying Daily Energy Usage on Bottom with last 30 days' average on Top
 
-# In[23]:
+# In[6]:
 
 def daily_vs_past30days():
     time_stamp = []
@@ -137,7 +139,8 @@ def daily_vs_past30days():
             except:
                 average.append(float('nan'))
     max_value = max(value)
-    ScalingSteps = (max_value + 0.1)/total_colors
+    min_value = min(value)
+    ScalingSteps = (max_value + 0.1 - min_value)/total_colors
             
     while (True):
         print 'Starting Display'
@@ -146,7 +149,7 @@ def daily_vs_past30days():
         for ts, val, av in zip(time_stamp, value, average):
             print 'Date: ', ts
             print 'Total use: ', val
-            color_index = int(val/ScalingSteps)
+            color_index = int((val-min_value)/ScalingSteps)
 
             # print color_index
             color = color_gn_rd[color_index]
@@ -154,7 +157,7 @@ def daily_vs_past30days():
 
             print 'Last 30 days average: ', av
             try:
-                color_index = int(df_RollingMean[count]/ScalingSteps)
+                color_index = int(av/ScalingSteps)
                 color = color_gn_rd[color_index]
                 led_set(40, 80, color)
 
@@ -168,7 +171,7 @@ def daily_vs_past30days():
 
 # ### Displaying 1 Week's Energy Use (res: every half-hour )
 
-# In[8]:
+# In[7]:
 
 def OneWeek_data():
     time_stamp = []
@@ -181,7 +184,7 @@ def OneWeek_data():
 
     days = ['Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
     max_value = max(value)
-    ScalingSteps = (max_value + 0.1)/total_colors
+    ScalingSteps = (max_value + 0.1 - 10)/total_colors
     date = []
     while (True):
         print 'Starting Display'
@@ -201,19 +204,28 @@ def OneWeek_data():
             color_index = int((val)/ScalingSteps)
 
             #print color_index
-            color = color_gn_rd[color_index]
-            led_set(0, 80, color)
-            time.sleep(0.2)
+            try:
+                color = color_gn_rd[color_index]
+                led_set(0, 80, color)
+                time.sleep(0.2)
+            except: 
+                color = color_gn_rd[0]
+                led_set(0, 80, color)
+                time.sleep(0.2)
+                
 
             date = time.strftime("%Y-%m-%d",  time.strptime(ts, "%Y-%m-%d %H:%M:%S"))
 
 
-# In[11]:
+# In[8]:
 
 print 'Functions Available:'
-print 'yearly_data(): Displays daily average for a year '
-print 'daily_vs_past30days(): Displays daily average + past 30 day avg.'
-print 'OneWeek_data(): Displays past 1 week’s data, 30 min interval '
+print 'yearly_data()'
+print 'daily_vs_past30days()'
+print 'OneWeek_data()'
+
+
+# In[ ]:
 
 
 
