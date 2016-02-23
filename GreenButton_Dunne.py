@@ -11,7 +11,6 @@ import numpy as np
 import time
 
 from datetime import datetime
-from dateutil import tz
 
 from bibliopixel import *
 from bibliopixel.drivers.LPD8806 import *
@@ -21,21 +20,19 @@ import bibliopixel.colors as colors
 
 # ### Generating color scale
 
-# In[2]:
+# In[21]:
 
 red = 0
-green = 255
+green = 100
 stepSize = 50
 color_gn_rd = []
 color_gn_rd.append((red, green, 0)) ## the lights are GRB format
 
 
-# In[3]:
+# In[22]:
 
-while(red < 255): ## start with green and increase red
+while(red < 205): ## start with green and increase red
     red += stepSize;
-    if(red > 245):
-        red = 255; 
     color_gn_rd.append((red, green, 0))
 
 while(green > 0): ## start with red + green and decrease green
@@ -45,6 +42,7 @@ while(green > 0): ## start with red + green and decrease green
     color_gn_rd.append((red, green, 0)); 
     
 total_colors = len(color_gn_rd)
+total_colors
 
 
 # ### Setting up LEDs
@@ -59,7 +57,7 @@ led=LEDStrip(driver)
 
 # ### Defining Flashing modes
 
-# In[4]:
+# In[12]:
 
 def led_set(start_position, numLEDs, color): ## Fills the colors
     led.fill(color, start=start_position,end=start_position+numLEDs)
@@ -90,7 +88,7 @@ def led_pulse(start_position, numLEDs, color):
 
 # ### Displaying Daily Total Values for the entire year of data
 
-# In[9]:
+# In[17]:
 
 def yearly_data():
     time_stamp = []
@@ -115,6 +113,7 @@ def yearly_data():
             #print color_index
             color = color_gn_rd[color_index]
             led_set(0, 80, color)
+            time.sleep(0.5)
 
 
 # ### Displaying Daily Energy Usage on Bottom with last 30 days' average on Top
@@ -165,7 +164,7 @@ def daily_vs_past30days():
                 color = (0,0,0)
                 led_set(40, 80, color)
 
-            time.sleep(0.2)
+            time.sleep(0.4)
     
 
 
@@ -184,6 +183,8 @@ def OneWeek_data():
 
     days = ['Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
     max_value = max(value)
+    min_value = 10 # there is a zero value that looks wrong. 
+                   # There is a better way to avoid zero values. I will remove them soon. 
     ScalingSteps = (max_value + 0.1 - 10)/total_colors
     date = []
     while (True):
@@ -223,9 +224,4 @@ print 'Functions Available:'
 print 'yearly_data()'
 print 'daily_vs_past30days()'
 print 'OneWeek_data()'
-
-
-# In[ ]:
-
-
 
