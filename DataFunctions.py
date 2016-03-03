@@ -70,7 +70,7 @@ def ScalingData(value, steps):
 
 # In[53]:
 
-def PlotData(time_stamp, value):
+#def PlotData(time_stamp, value):
     #plt.plot(time_stamp, value)
     #plt.xlabel('Time')
     #plt.ylabel('Energy Use in kWh')
