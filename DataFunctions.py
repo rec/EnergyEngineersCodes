@@ -6,8 +6,8 @@
 import numpy as np
 import csv
 import time
-import matplotlib
-import matplotlib.pyplot as plt
+#import matplotlib
+#import matplotlib.pyplot as plt
 import pandas as pd
 from LEDsetup import *
 
@@ -71,10 +71,10 @@ def ScalingData(value, steps):
 # In[53]:
 
 def PlotData(time_stamp, value):
-    plt.plot(time_stamp, value)
-    plt.xlabel('Time')
-    plt.ylabel('Energy Use in kWh')
-    plt.show()
+    #plt.plot(time_stamp, value)
+    #plt.xlabel('Time')
+    #plt.ylabel('Energy Use in kWh')
+    #plt.show()
 
 
 # In[61]:
