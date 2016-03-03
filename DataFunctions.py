@@ -8,7 +8,7 @@ import csv
 import time
 #import matplotlib
 #import matplotlib.pyplot as plt
-import pandas as pd
+#import pandas as pd
 from LEDsetup import *
 
 
@@ -46,7 +46,7 @@ def OpenData(filename):
     with open(filename) as f:
         cf = csv.DictReader(f, fieldnames=['time_stamp', 'value'])
         for row in cf:
-            time_stamp.append(pd.to_datetime(row['time_stamp']))
+            time_stamp.append((row['time_stamp']))
             value.append(float(row['value']))
     
     return(time_stamp, value)
