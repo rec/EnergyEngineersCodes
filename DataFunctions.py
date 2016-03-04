@@ -6,8 +6,9 @@
 import numpy as np
 import csv
 import time
-#import matplotlib
-#import matplotlib.pyplot as plt
+import matplotlib
+import matplotlib.pyplot as plt
+import datetime
 #import pandas as pd
 from LEDsetup import *
 
@@ -46,8 +47,13 @@ def OpenData(filename):
     with open(filename) as f:
         cf = csv.DictReader(f, fieldnames=['time_stamp', 'value'])
         for row in cf:
-            time_stamp.append((row['time_stamp']))
+            try:
+                time_stamp.append(datetime.datetime.strptime(row['time_stamp'], "%Y-%m-%d"))
+                
+            except:
+                time_stamp.append(datetime.datetime.strptime(row['time_stamp'], "%Y-%m-%d %H:%M:%S"))
             value.append(float(row['value']))
+                
     
     return(time_stamp, value)
 
@@ -70,18 +76,18 @@ def ScalingData(value, steps):
 
 # In[53]:
 
-#def PlotData(time_stamp, value):
-    #plt.plot(time_stamp, value)
-    #plt.xlabel('Time')
-    #plt.ylabel('Energy Use in kWh')
-    #plt.show()
+def PlotData(time_stamp, value):
+    plt.plot(time_stamp, value)
+    plt.xlabel('Time')
+    plt.ylabel('Energy Use in kWh')
+    plt.show()
 
 
 # In[61]:
 
 def DispColors(clrs):
     for i, color in enumerate(clrs):
-        print('color '+ str(i+1))
+        print('color '+str(i+1))
         led.fill(color)
         led.update()
         time.sleep(0.4)
