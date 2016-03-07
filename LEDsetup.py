@@ -32,7 +32,11 @@ import time
 # in our case it is Blue Red Green (BRG)
 
 
+<<<<<<< HEAD
 numLeds=80
+=======
+numLeds=10*8
+>>>>>>> f1eb4fd6378297145a1ad544a00f1685f8457ce0
 driver=DriverLPD8806(numLeds, ChannelOrder.BRG)
 
 # We name our LEDstrips 'led'. 
