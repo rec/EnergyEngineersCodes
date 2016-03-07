@@ -32,8 +32,8 @@ import time
 # in our case it is Blue Red Green (BRG)
 
 
-numLeds=10*8
-driver=DriverLPD8806(numLeds, ChannelOrder.BRG)
+numLeds=80s
+driver=DriverLPD8806(numLeds, c_order = ChannelOrder.BRG)
 
 # We name our LEDstrips 'led'. 
 # We tell the driver that it is a long string of LEDs, not a rectangle or any other shape
