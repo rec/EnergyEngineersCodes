@@ -25,16 +25,14 @@ def ColorScale(steps):
     
     ## INCREASING RED
     while(red < 255): ## start with green and increase red
-        clrs.append((red, green, 0))
+        clrs.append((int(red), int(green), 0))
         red += inc;
     
     red = 255
     ## DECREASING GREEN
     while(green > inc): ## start with red + green and decrease green
-        green -= inc;
-        if(green < 6):
-            green = 0; 
-        clrs.append((red, green, 0)); 
+        green -= inc
+        clrs.append((int(red), int(green), 0)); 
         
     return clrs
 
