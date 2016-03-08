@@ -1,0 +1,10 @@
+from LEDsetup import *
+led.fill(Red, 0, 9)
+led.fill(Green,10, 19)
+led.fill(Blue,20, 29)
+led.fill(Turquoise,30, 39)
+led.fill(Fuchsia,40, 49)
+led.fill(Beige,50, 59)
+led.fill(Orange,60, 69)
+led.fill(Crimson,70, 79)
+led.update()
