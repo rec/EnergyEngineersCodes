@@ -105,11 +105,11 @@ def Group2():
     # Step 4: Display data on LEDs
 
     count = 1
-    size = len(clr_dunne)
 
-    Flash(###number of times, ###delay, ###color) ## Flash at the beginning
+    Flash(5, 0.5, Purple)
+    ###number of times, ###delay, ###color) ## Flash at the beginning
 
-    for i in range(size):
+    for i in range(364):
         led.fill(clr_dunne[i], 0, 39)
         led.fill(clr_lindblom[i], 40, 79)
         led.update()
