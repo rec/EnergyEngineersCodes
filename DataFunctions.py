@@ -117,6 +117,9 @@ def Flash(num_flashes, delay, color, led1 = 0, led2 = 79):
         led.fill(color, led1, led2)
         led.update()
         time.sleep(delay)
+        led.fill((0,0,0), led1, led2)
+        time.sleep(delay)
+
 
 
 # In[ ]:
