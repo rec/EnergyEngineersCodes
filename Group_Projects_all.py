@@ -107,7 +107,7 @@ def Group2():
     Flash(5, 0.5, Purple)
     ###number of times, ###delay, ###color) ## Flash at the beginning
 
-    for i in range(10):
+    for i in range(40):
         led.fill(clr_dunne[i], 0, 11)
         led.fill(clr_lindblom[i], 12, 23)
         led.update()
