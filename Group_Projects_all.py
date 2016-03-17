@@ -107,9 +107,9 @@ def Group2():
     Flash(5, 0.5, Purple)
     ###number of times, ###delay, ###color) ## Flash at the beginning
 
-    for i in range(size):
-        led.fill(clr_dunne[i], 0, 39)
-        led.fill(clr_lindblom[i], 40, 79)
+    for i in range(10):
+        led.fill(clr_dunne[i], 0, 11)
+        led.fill(clr_lindblom[i], 12, 23)
         led.update()
 
         if (count == 7):
@@ -168,9 +168,9 @@ def Group3():
 
     Flash(5, 0.5, Purple) ## Flash everytime it starts over
 
-    for i in range(size):
-        led.fill(clr_winter[i], 0, 39)
-        led.fill(clr_summer[i], 40, 79)
+    for i in range(2):
+        led.fill(clr_winter[i], 0, 11)
+        led.fill(clr_summer[i], 12, 23)
         led.update()
         time.sleep(0.5)
         
@@ -218,9 +218,9 @@ def Group4():
     # Step 4: Display data on LEDs
     
     size = len(value1)
-    for i in range(size):
-        led.fill(clr_lindblom[i], 0, 39)
-        led.fill(clr_dunne[i], 40, 79)
+    for i in range(2):
+        led.fill(clr_lindblom[i], 0, 11)
+        led.fill(clr_dunne[i], 12, 23)
         led.update()
         
         time.sleep(0.5)
