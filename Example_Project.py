@@ -16,14 +16,10 @@ from DataFunctions import *
 
 # Step 1: OPEN FILE
 # Pick the data on bottom first, then data on top. 
-
 [month1, year1, value1] = OpenMonthlyData('Dunne_Summer_Monthly_Average_KW.csv')
 [month2, year2, value2] = OpenMonthlyData('Dunne_Winter_Monthly_Average_KW.csv')
-
 #----------------------------------------#
-
 # Step 2: GET MIN & MAX 
-
 # We want both data to display on the same scale. 
 # We choose the lowest of the lowest and highest of the highest value
 
@@ -37,7 +33,6 @@ min_value = min(min_value1,min_value2)
 max_value = max(max_value1,max_value2)
 
 #----------------------------------------#
-
 # Step 3a: SCALE DATA BY COLOR. TO SCALE DATA BY NUMBER, look at step 3b.
 
 color_low = Green
@@ -47,7 +42,6 @@ clr_summer = ColorScaler(color_low, color_high, value1, min_value, max_value)
 clr_winter = ColorScaler(color_low, color_high, value2, min_value, max_value)
 
 #----------------------------------------#
-
 # Step 3b : SCALE DATA BY NUMBER OF LEDs
 # Using entire 80 LEDs to scale the summer data alone. 
 # If you are only using the bottom panel, do the command twice - once with summer and once with winter. 
@@ -76,8 +70,6 @@ for i in range(size):
 
     led.update()
     time.sleep(0.5)
-
-
 #----------------------------------------#
 
 # Step 4b: Display NUMBER data on LEDs
@@ -97,7 +89,7 @@ while (True): ## TO CONTINUOUSLY REPEAT DATA
 
     for i in range(size):
         # Summer on all panels --> LEDS 0-79. 
-
+        led.fill((0,0,0))
         led.fill(color_summer, 0, numLED_all[i])
         led.update()
         time.sleep(0.5)
