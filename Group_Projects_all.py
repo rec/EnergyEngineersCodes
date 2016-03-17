@@ -46,11 +46,12 @@ def Group1():
 
     # Step 4b: Display data on LEDs
     print ('Press control + C to stop the program')
-    Flash(5, 0.5, Purple) ## Flash everytime it starts over
+    Flash(3, 0.2, Purple) ## Flash everytime it starts over
     summer_color = Yellow
     winter_color = Pink
+    size = len(value1)
 
-    for i in range(3):
+    for i in range(size):
         led.fill(winter_color, 0, numLED_winter[i])
         led.fill(summer_color, 40, numLED_summer[i])
         led.update()
@@ -101,24 +102,20 @@ def Group2():
 
     # Step 4: Display data on LEDs
 
-    count = 1
     size = len(value1)
 
-    Flash(5, 0.5, Purple)
     ###number of times, ###delay, ###color) ## Flash at the beginning
 
-    for i in range(40):
-        led.fill(clr_dunne[i], 0, 11)
-        led.fill(clr_lindblom[i], 12, 23)
+    for i in range(size):
+
+        if (i % 7 == 0):
+            Flash(3, 0.2, Purple) ## at number = 7, counting from 0. End of the week.
+
+            
+        led.fill(clr_dunne[i], 0, 39)
+        led.fill(clr_lindblom[i], 40, 79)
         led.update()
-
-        if (count == 7):
-            Flash(5, 0.5, Purple) ## at number = 7, counting from 0. End of the week. 
-            count = 1
-
-        count = count + 1
-        
-        time.sleep(0.5)
+        time.sleep(0.2)
 
 
 # 
@@ -168,9 +165,9 @@ def Group3():
 
     Flash(5, 0.5, Purple) ## Flash everytime it starts over
 
-    for i in range(2):
-        led.fill(clr_winter[i], 0, 11)
-        led.fill(clr_summer[i], 12, 23)
+    for i in range(size):
+        led.fill(clr_winter[i], 0, 39)
+        led.fill(clr_summer[i], 40, 79)
         led.update()
         time.sleep(0.5)
         
@@ -218,14 +215,14 @@ def Group4():
     # Step 4: Display data on LEDs
     
     size = len(value1)
-    for i in range(2):
-        led.fill(clr_lindblom[i], 0, 11)
-        led.fill(clr_dunne[i], 12, 23)
+    for i in range(size):
+        led.fill(clr_lindblom[i], 0, 39)
+        led.fill(clr_dunne[i], 40, 79)
         led.update()
         
-        time.sleep(0.5)
+        time.sleep(0.2)
 
-        Flash(5, 0.5, Purple)
+        Flash(3, 0.2, Purple)
         
 
 

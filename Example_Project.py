@@ -32,6 +32,9 @@ max_value2 = max(value2)
 min_value = min(min_value1,min_value2)
 max_value = max(max_value1,max_value2)
 
+#print('maximum value is', max_value)
+#print('minimum value is', min_value)
+
 #----------------------------------------#
 # Step 3a: SCALE DATA BY COLOR. TO SCALE DATA BY NUMBER, look at step 3b.
 
@@ -57,19 +60,19 @@ numLED_all = NumScaler(0, 79, value1, min_value, max_value)
 # This displays data once and stops
 print ('Displaying COLOR data')
 
-Flash(5, 0.5, Purple) ## Flash everytime it starts over
+Flash(5, 0.2, Purple) ## Flash everytime it starts over
 size = len(clr_summer)
 
 for i in range(size):
     # Summer on Bottom --> LEDS 0-39. 
 
-    led.fill(clr_summer[i], 0, 11)
+    led.fill(clr_summer[i], 0, 39)
 
     # Winter on TOP --> LEDS 40-79
-    led.fill(clr_winter[i], 12, 23)
+    led.fill(clr_winter[i], 40, 79)
 
     led.update()
-    time.sleep(0.5)
+    time.sleep(0.4)
 #----------------------------------------#
 
 # Step 4b: Display NUMBER data on LEDs
@@ -84,7 +87,7 @@ print ('Press control + C to stop the program')
 
 while (True): ## TO CONTINUOUSLY REPEAT DATA
     
-    Flash(5, 0.5, Purple) ## Flash everytime it starts over
+    Flash(5, 0.2, Purple) ## Flash everytime it starts over
     size = len(numLED_all)
 
     for i in range(size):
@@ -92,6 +95,6 @@ while (True): ## TO CONTINUOUSLY REPEAT DATA
         led.fill((0,0,0))
         led.fill(color_summer, 0, numLED_all[i])
         led.update()
-        time.sleep(0.5)
+        time.sleep(0.4)
 
 
