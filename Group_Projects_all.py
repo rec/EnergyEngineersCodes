@@ -50,8 +50,8 @@ def Group1():
 
         Flash(5, 0.5, Purple) ## Flash everytime it starts over
 
-        summer_color = ###
-        winter_color = ###
+        summer_color = Yellow
+        winter_color = Pink
 
         for i in range(3):
             led.fill(winter_color, 0, numLED_winter[i])
