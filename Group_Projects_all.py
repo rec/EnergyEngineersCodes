@@ -48,7 +48,7 @@ def Group1():
     while (True): ## TO CONTINUOUSLY REPEAT DATA
         print ('Press control + C to stop the program')
 
-        Flash(###, ###, ###) ## Flash everytime it starts over
+        Flash(5, 0.5, Purple) ## Flash everytime it starts over
 
         summer_color = ###
         winter_color = ###
@@ -95,8 +95,8 @@ def Group2():
     # Step 3: SCALE DATA
     # Dunne on Bottom --> 0 to 39. Lindblom on TOP --> LEDS 40-79
     
-    color_low = ###
-    color_high = ###
+    color_low = Green
+    color_high = Red
 
     clr_dunne = ColorScaler(color_low, color_high, value1, min_value, max_value)
     clr_lindblom = ColorScaler(color_low, color_high, value2, min_value, max_value)
@@ -115,7 +115,7 @@ def Group2():
         led.update()
 
         if (count == 7):
-            Flash(###number of times, ###delay, ###color) ## at number = 7, counting from 0. End of the week. 
+            Flash(5, 0.5, Purple) ## at number = 7, counting from 0. End of the week. 
             count = 1
 
         count = count + 1
@@ -161,8 +161,8 @@ def Group3():
     # Step 3: SCALE DATA
     # Winter on Bottom --> 0 to 39. Summer on TOP --> LEDS 40-79
     
-    color_low = ###
-    color_high = ###
+    color_low = Green
+    color_high = Red
 
     clr_winter = ColorScaler(color_low, color_high, value1, min_value, max_value)
     clr_summer = ColorScaler(color_low, color_high, value2, min_value, max_value)
@@ -173,13 +173,13 @@ def Group3():
     while (True): ## TO CONTINUOUSLY REPEAT DATA
         print ('Press control + C to stop the program')
 
-        Flash(###, ###, ###) ## Flash everytime it starts over
+        Flash(0.5, ) ## Flash everytime it starts over
 
         for i in range(3):
             led.fill(clr_winter[i], 0, 39)
             led.fill(clr_summer[i], 40, 79)
             led.update()
-            time.delay(### pick a time delay)
+            time.sleep(0.5)
         
         
 
@@ -215,8 +215,8 @@ def Group4():
     # Step 3: SCALE DATA
     # Winter on Bottom --> 0 to 39. Summer on TOP --> LEDS 40-79
     
-    color_low = ###
-    color_high = ###
+    color_low = Green
+    color_high = Red
 
     clr_lindblom = ColorScaler(color_low, color_high, value1, min_value, max_value)
     clr_dunne = ColorScaler(color_low, color_high, value2, min_value, max_value)
@@ -234,4 +234,19 @@ def Group4():
 
         Flash(###number of times, ###delay, ###color) ## at number = 7, counting from 0. End of the week. 
         
+
+
+# In[ ]:
+
+print ('Displaying Group 1')
+Group1()
+
+print ('Displaying Group 2')
+Group2()
+
+print ('Displaying Group 3')
+Group3()
+
+print ('Displaying Group 4')
+Group3()
 
