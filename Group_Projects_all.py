@@ -45,19 +45,16 @@ def Group1():
     #----------------------------------------#
 
     # Step 4b: Display data on LEDs
-    while (True): ## TO CONTINUOUSLY REPEAT DATA
-        print ('Press control + C to stop the program')
+    print ('Press control + C to stop the program')
+    Flash(5, 0.5, Purple) ## Flash everytime it starts over
+    summer_color = Yellow
+    winter_color = Pink
 
-        Flash(5, 0.5, Purple) ## Flash everytime it starts over
-
-        summer_color = Yellow
-        winter_color = Pink
-
-        for i in range(3):
-            led.fill(winter_color, 0, numLED_winter[i])
-            led.fill(summer_color, 40, numLED_summer[i])
-            led.update()
-            time.delay(0.5)
+    for i in range(3):
+        led.fill(winter_color, 0, numLED_winter[i])
+        led.fill(summer_color, 40, numLED_summer[i])
+        led.update()
+        time.sleep(0.5)
         
         
     
@@ -167,16 +164,15 @@ def Group3():
     # Step 4: Display data on LEDs
     size = len(value1)
 
-    while (True): ## TO CONTINUOUSLY REPEAT DATA
-        print ('Press control + C to stop the program')
+    print ('Press control + C to stop the program')
 
-        Flash(5, 0.5, Purple) ## Flash everytime it starts over
+    Flash(5, 0.5, Purple) ## Flash everytime it starts over
 
-        for i in range(size):
-            led.fill(clr_winter[i], 0, 39)
-            led.fill(clr_summer[i], 40, 79)
-            led.update()
-            time.sleep(0.5)
+    for i in range(size):
+        led.fill(clr_winter[i], 0, 39)
+        led.fill(clr_summer[i], 40, 79)
+        led.update()
+        time.sleep(0.5)
         
         
 

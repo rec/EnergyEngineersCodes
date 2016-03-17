@@ -115,7 +115,7 @@ def NumScaler(led1, led2, value, min_value = 0, max_value = 0):
 def Flash(num_flashes, delay, color, led1 = 0, led2 = 79):
     for i in range(num_flashes):
         led.fill(color, led1, led2)
-        led.update
+        led.update()
         time.sleep(delay)
 
 
