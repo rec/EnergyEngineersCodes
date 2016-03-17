@@ -105,11 +105,12 @@ def Group2():
     # Step 4: Display data on LEDs
 
     count = 1
+    size = len(value1)
 
     Flash(5, 0.5, Purple)
     ###number of times, ###delay, ###color) ## Flash at the beginning
 
-    for i in range(364):
+    for i in range(size):
         led.fill(clr_dunne[i], 0, 39)
         led.fill(clr_lindblom[i], 40, 79)
         led.update()
@@ -122,11 +123,6 @@ def Group2():
         
         time.sleep(0.5)
 
-            
-
-        
-        
-
 
 # 
 # ### Group 3: 
@@ -138,8 +134,8 @@ def Group3():
     # Step 1: OPEN FILE
     # Pick the data on bottom first, then data on top. 
 
-    [month1, year1, value1] = OpenDailyData('Dunne_Winter_Daily_Average_KW.csv')
-    [month2, year2, value2] = OpenDailyData('Dunne_Summer_Daily_Average_KW.csv')
+    [time_stamp1, value1] = OpenDailyData('Dunne_Winter_Daily_Average_KW.csv')
+    [time_stamp2, value2] = OpenDailyData('Dunne_Summer_Daily_Average_KW.csv')
 
     #----------------------------------------#
         
@@ -169,13 +165,14 @@ def Group3():
     #----------------------------------------#
 
     # Step 4: Display data on LEDs
+    size = len(value1)
 
     while (True): ## TO CONTINUOUSLY REPEAT DATA
         print ('Press control + C to stop the program')
 
         Flash(5, 0.5, Purple) ## Flash everytime it starts over
 
-        for i in range(3):
+        for i in range(size):
             led.fill(clr_winter[i], 0, 39)
             led.fill(clr_summer[i], 40, 79)
             led.update()
@@ -224,7 +221,7 @@ def Group4():
 
     # Step 4: Display data on LEDs
     
-    size = len(clr_Lindblom)
+    size = len(value1)
     for i in range(size):
         led.fill(clr_lindblom[i], 0, 39)
         led.fill(clr_dunne[i], 40, 79)
@@ -232,7 +229,7 @@ def Group4():
         
         time.sleep(0.5)
 
-        Flash(###number of times, ###delay, ###color) ## at number = 7, counting from 0. End of the week. 
+        Flash(5, 0.5, Purple)
         
 
 
