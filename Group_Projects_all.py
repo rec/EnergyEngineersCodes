@@ -120,7 +120,7 @@ def Group2():
 
         count = count + 1
         
-        time.sleep(#pick a time delay)
+        time.sleep(0.5)
 
             
 
@@ -173,7 +173,7 @@ def Group3():
     while (True): ## TO CONTINUOUSLY REPEAT DATA
         print ('Press control + C to stop the program')
 
-        Flash(0.5, ) ## Flash everytime it starts over
+        Flash(5, 0.5, Purple) ## Flash everytime it starts over
 
         for i in range(3):
             led.fill(clr_winter[i], 0, 39)
@@ -230,7 +230,7 @@ def Group4():
         led.fill(clr_dunne[i], 40, 79)
         led.update()
         
-        time.sleep(#pick a time delay)
+        time.sleep(0.5)
 
         Flash(###number of times, ###delay, ###color) ## at number = 7, counting from 0. End of the week. 
         
