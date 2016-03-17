@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# In[ ]:
+# In[2]:
 
 from DataFunctions import *
 
@@ -39,12 +39,12 @@ max_value = max(max_value1,max_value2)
 #----------------------------------------#
 
 # Step 3: SCALE DATA
-# Winter on Bottom --> LEDS 0-39. Summer on TOP --> LEDS 40-79
 
 color_low = Green
 color_high = Red
-clr_summer = ColorScaler(0, 39, value1, min_value, max_value)
-clr_winter = ColorScaler(40, 79, value2, min_value, max_value)
+
+clr_summer = ColorScaler(color_low, color_high, value1, min_value, max_value)
+clr_winter = ColorScaler(color_low, color_high, value2, min_value, max_value)
 
 #----------------------------------------#
 
@@ -54,15 +54,16 @@ print ('Press control + C to stop the program')
 while (True): ## TO CONTINUOUSLY REPEAT DATA
 
     Flash(5, 0.5, Purple) ## Flash everytime it starts over
-
-    summer_color = Yellow
-    winter_color = Pink
-    
     size = len(numLED_summer)
 
     for i in range(size):
-        led.fill(summer_color, 0, numLED_winter[i])
-        led.fill(winter_color, 40, numLED_summer[i])
+        # Summer on Bottom --> LEDS 0-39. 
+
+        led.fill(clr_summer[i], 0, 39)
+        
+        # Winter on TOP --> LEDS 40-79
+        led.fill(clr_winter[i], 40, 79)
+        
         led.update()
         time.delay(0.5)
 
