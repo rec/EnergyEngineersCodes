@@ -69,13 +69,13 @@ size = len(clr_summer)
 for i in range(size):
     # Summer on Bottom --> LEDS 0-39. 
 
-    led.fill(clr_summer[i], 0, 39)
+    led.fill(clr_summer[i], 0, 11)
 
     # Winter on TOP --> LEDS 40-79
-    led.fill(clr_winter[i], 40, 79)
+    led.fill(clr_winter[i], 12, 23)
 
     led.update()
-    time.delay(0.5)
+    time.sleep(0.5)
 
 
 #----------------------------------------#
@@ -100,6 +100,6 @@ while (True): ## TO CONTINUOUSLY REPEAT DATA
 
         led.fill(color_summer, 0, numLED_all[i])
         led.update()
-        time.delay(0.5)
+        time.sleep(0.5)
 
 
