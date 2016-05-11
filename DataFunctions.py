@@ -56,20 +56,20 @@ def OpenMonthlyData(filename):
 
 # In[19]:
 
-#def ColorScale(steps, color1, color2):
-    #clrs = []
-    #inc = 1/(steps-1)
-    #print(inc)
+def ColorScale(steps, color1, color2):
+    clrs = []
+    inc = 1/(steps-1)
+    print(inc)
     
-    #for i in range(steps):
-        #new_color = (int(color1[0]*i*inc+color2[0]*(steps-i-1)*inc),
-                     #int(color1[1]*i*inc+color2[1]*(steps-i-1)*inc), 
-                     #int(color1[2]*i*inc+color2[2]*(steps-i-1)*inc))
-        #print(new_color)
-        #clrs.append(new_color)
+    for i in range(steps):
+        new_color = (int(color1[0]*i*inc+color2[0]*(steps-i-1)*inc),
+                     int(color1[1]*i*inc+color2[1]*(steps-i-1)*inc), 
+                     int(color1[2]*i*inc+color2[2]*(steps-i-1)*inc))
+        print(new_color)
+        clrs.append(new_color)
 
         
-    #return clrs
+    return clrs
 
 
 
