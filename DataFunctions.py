@@ -10,7 +10,7 @@ import matplotlib
 import matplotlib.pyplot as plt
 import datetime
 #import pandas as pd
-from LEDsetup import *
+#from LEDsetup import *
 
 
 # ### Open datafiles
@@ -58,7 +58,8 @@ def OpenMonthlyData(filename):
 
 def ColorScale(steps, color1=(0,255,0), color2=(0,0,255)):
     clrs = []
-    inc = 1/(steps-1)
+    din = float(steps-1)
+    inc = float(1.0/din)
     print(inc)
     
     for i in range(steps):
@@ -86,7 +87,7 @@ def ColorScaler(color_low, color_high, value, min_value = 0, max_value = 0):
         new_color = (int(color_high[0]*ratio+color_low[0]*(1-ratio)),
                      int(color_high[1]*ratio+color_low[1]*(1-ratio)), 
                      int(color_high[2]*ratio+color_low[2]*(1-ratio)))
-        #print(new_color)
+        print(new_color)
         clr_data.append(new_color)
                 
     return clr_data
