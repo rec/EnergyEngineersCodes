@@ -59,7 +59,7 @@ def OpenMonthlyData(filename):
 def ColorScale(steps, color1=(0,255,0), color2=(0,0,255)):
     clrs = []
     din = float(steps-1)
-    inc = float(1.0/din)
+    inc = float(1.0/(steps-1))
     print(inc)
     
     for i in range(steps):
