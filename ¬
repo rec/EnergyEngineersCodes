@@ -1,0 +1,21 @@
+
+from LEDsetup import*
+
+while(True):
+
+	for x in range(0,40):
+		led.set(x,Red)
+		led.update()		
+		time.sleep(0.03)
+		led.set(x,Off)
+		time.sleep(0.03)
+		
+	for y in range(80,41,-1):
+		led.set(y,Gold)
+		led.update()
+		time.sleep(0.03)
+		led.set(y,Off)
+		time.sleep(0.03)
+
+
+

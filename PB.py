@@ -1,0 +1,38 @@
+from LEDsetup import*
+while(True):
+    led.fill(Green,1,10)
+    led.update()
+    led.set(3,Blue)
+    time.sleep(0.2)
+    led.update()
+    led.fill(Off)
+    led.set(4,Yellow)
+    time.sleep(0.2)
+    led.update()
+    led.fill(Off)
+    led.set(5,Brown)
+    time.sleep(0.2)
+    led.update()
+    led.fill(Off)
+    led.set(6,Pink)
+    time.sleep(0.2)
+    led.update()
+    led.fill(Off)
+    led.fill(Blue,11,20)
+    led.update()
+    led.set(12,Gold)
+    time.sleep(0.2)
+    led.update()
+    led.fill(Off)
+    led.set(14,Orange)
+    time.sleep(0.2)
+    led.update()
+    led.fill(Off)
+    led.set(18,Crimson)
+    time.sleep(0.2)
+    led.update()
+    led.fill(Off)
+    
+    
+    
+    
