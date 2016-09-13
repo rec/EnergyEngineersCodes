@@ -7,7 +7,7 @@ import numpy as np
 import csv
 import time
 import matplotlib
-matplotlib.rcParams['backend'] = "Qt4Agg"
+#matplotlib.rcParams['backend'] = "Qt4Agg"
 import matplotlib.pyplot as plt
 import datetime
 #import pandas as pd

@@ -1,5 +1,5 @@
-#This program kindof cheats when it comes to LED color selection. We forced
-#the colors to be what we watned.
+#This program kind of cheats when it comes to LED color selection. We forced
+#the colors to be what we wanted.
 
 from LEDsetup import*   
 from DataFunctions import *

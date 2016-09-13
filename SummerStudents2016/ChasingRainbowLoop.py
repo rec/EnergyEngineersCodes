@@ -3,7 +3,7 @@ from LEDsetup import*
 
 while(True):
 	
-	for x in range(0,85):
+	for x in range(0,105):
 		led.set(x,Red)
 		led.set(x-1,Orange)
 		led.set(x-2,Yellow)
