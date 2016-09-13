@@ -1,4 +1,4 @@
-#This prompts the user for input and then flashes each letter individually.
+#This prompts the user for input and then scrolls each letter individually.
 
 from LEDsetup import*
 

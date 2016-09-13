@@ -24,7 +24,7 @@ call(["sudo", "chmod", "a+rw", "/dev/spidev0.0"])
 
 # In[ ]:
 
-numLeds= 10 * 8
+numLeds= 10 * 10
 driver=DriverLPD8806(numLeds, ChannelOrder.BRG)
 led=LEDStrip(driver)
 
@@ -45,7 +45,7 @@ for i in range (numLeds):
     print ('LED '+str(i+1))
     led.set(i, b)
     led.update()
-    time.sleep(0.25)
+    time.sleep(0.10)
 
 print ('All LEDs!')
 

@@ -6,7 +6,7 @@ led.update()
 
 color = Pink
 
-flashtime = 0.5
+flashtime = 1.0
 
 
 def flash_A(color):
