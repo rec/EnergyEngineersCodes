@@ -1,4 +1,3 @@
-
 ###############################################################
 
 # This is a demo program for the Energy Engineers.
