@@ -13,8 +13,8 @@ def flash_A(color):
     a=[11,12,13,14,15,21,22,23,24,25,26,33,36,37,43,47,53,57,63,66,71,72,73,74,75]
     for i in a:
         led.set(i,color)
-    led.update()
-    time.sleep(flashtime)
+        led.update()
+        time.sleep(flashtime)
 flash_A(color)
 
 
@@ -283,9 +283,9 @@ flash_S(color)
 def flash_T(color):
         t=[17,27,31,32,33,34,35,36,37,41,42,43,44,45,46,47,51,52,53,54,55,56,57,67,77]
 	for i in t:
-                led.set(i,color)
-        led.update()
-	time.sleep(flashtime)
+            led.set(i,color)
+            led.update()
+            time.sleep(flashtime)
 	
 #time.sleep(2)
 led.fill(Off)
