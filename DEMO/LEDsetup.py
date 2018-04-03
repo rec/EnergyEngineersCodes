@@ -11,6 +11,7 @@ call(["sudo", "chmod", "a+rw", "/dev/spidev0.0"])
 
 from bibliopixel.layout import Strip
 from bibliopixel.drivers.SPI import LPD8806
+from bibliopixel.drivers.channel_order import ChannelOrder
 
 # Importing the library that has the function time.sleep()
 
